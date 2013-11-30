@@ -1,0 +1,110 @@
+turf
+===
+
+[turf](https://github.com/morganherlocker/turf) is a gis engine written 100% in javascript with minimal dependencies. It is written in node.js, but can be run browser side as well using browserify or bower. It's goal is to provide a simple library for performing common geospatial analysis tasks such as:
+
+- buffering
+- aggregating data within polygons
+- data interpolation
+- smoothing polygons or lines
+- classifying data
+- clustering points
+- creating TINs
+- creating contours around data
+
+<img src='https://raw.github.com/morganherlocker/turf/master/img/turf.png' style='width:110px'>
+
+---
+
+**Their are many other gis engines out there so why did I build turf?**
+
+1. Many of the other engines are difficult to understand, as the docs and apis for most of these projects have become bloated and overly detailed. turf aims to have simple docs, and you should be able to perform just about any basic geospatial operation in a few lines of code. 
+
+2. These engines require significant server configuration to get running. turf is simple to install and use. Assuming you have node installed, just enter the following and you are on your way:
+
+  ```bash
+  npm install turf
+  ```
+
+3. While server side processing is currently the norm, I wanted the ability to offload work to the browser as needed. Most standard gis operations in current client side frameworks actually depend upon calls to web services hosted by 3rd parties. This is less than ideal.
+
+4. Geojson has become the defacto standard for geo data on the web. turf takes this to heart and is built from the ground up around geojson. Geojson is one of the only human readable geospatial formats, and anyone can understand it by reading the [spec](http://geojson.org/geojson-spec.html) in a matter of minutes. Compare this to some of the other standards that rely on proprietary formats, multiple binaries, or incomprehensible XML.
+
+5. Anyone who has worked with many of the existing engines knows that most of them are slow as mud. Before I wrote turf I had a production service that processed a bunch of data to output contours and it took about 70 seconds to compute. That same algorithm in turf now takes 35 milliseconds. Order of magnitude performance increases allow us to crunch data in novel ways that would have been impractical before.
+
+---
+
+**other notes:**
+
+- The project is open source under and MIT license, so anyone is free to do whatever they want with it. 
+- turf takes geojson, does its processing, and spits out new geojson. It does not do rendering. If you are looking to display the output of turf, I would recommend something like [QGIS](http://www.qgis.org/en/site/) on the desktop or [Leaflet](http://leafletjs.com/) for web apps.
+
+---
+
+**some examples:**
+
+TIN:
+
+```javascript
+var t = require('turf')
+var z = 'elevation'
+
+t.load('/path/to/pointsfeatures/elevationPoints.geojson', function(err, points){
+  t.tin(points, z, function(err, tin){
+    if(err) throw err
+    console.log(tin)
+  })
+})
+```
+
+![tin](../img/tin.jpg)
+
+contours:
+
+```javascript
+var t = require('turf')
+var z = 'elevation'
+var resolution = 15
+var breaks = [.1, 22, 45, 55, 65, 85,  95, 105, 120, 180]
+
+t.load('../path/to/points.geojson', function(err, points){
+  t.contour(points, z, resolution, breaks, function(err, contours){
+    if(err) throw err
+    console.log(contours)
+  })
+})
+```
+
+![contours](../img/contours.jpg)
+
+smoothing:
+
+```javascript
+var t = require('turf')
+var resolution = 5000
+var intensity = .85
+var lineIn = t.linestring([
+      [
+        -80.08724212646484,
+        32.77428536643231
+      ],
+      [
+        -80.03746032714844,
+        32.84007757059952
+      ], ...
+      ]
+    ])
+
+t.bezier(lineIn, 5000, .85, function(err, lineOut){
+  if(err) throw err
+  console.log(lineOut)
+})
+```
+
+![jagged line](../img/jagged.jpg)
+
+![smooth line](../img/smooth.jpg)
+
+---
+
+*11-26-13*
