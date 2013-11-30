@@ -5,7 +5,11 @@ a terrible node.js blog engine with barely any features
 
 ### What?!
 
-badblog is a dead simple blog engine powered by express and simple markdown files. To get going, do the following:
+badblog is a dead simple blog engine powered by simple markdown files. It will create a bare bones blog that will automatically serve up posts with pretty urls. Other than that, it does basically nothing. The default design includes responsive rendering and not much else. Feel free to modify things to meet your needs.
+
+### Getting Started
+
+To get going, do the following:
 
 ```bash
 npm install badblog -g
