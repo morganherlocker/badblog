@@ -3,7 +3,7 @@
 var program = require('commander')
   , fs = require('fs'),
   ncp = require('ncp').ncp,
-  rifraf = require('rimraf'),
+  rimraf = require('rimraf'),
   colors = require('colors');
 
 console.log('badblog =>'.bold.underline.inverse.green)
@@ -20,12 +20,27 @@ else {
   console.log('Creating blog at: '+blogPath+'...')
   fs.exists(blogPath, function(exists) {
     if(!exists || (exists && program.force)) {
-      fs.mkdir(blogPath, function(err) {
-        if(err) throw err
+      rimraf(blogPath, function(err){
+        fs.mkdir(blogPath, function(err) {
+          if(err) throw err
+          copyBlog(blogPath, function(){
+            console.log('<= sucess!'.bold.underline.inverse.green)
+          })
+        })
       })
     }
     else {
       console.log('Directory already exists. Rename the directory or use -f to overwrite the existing directory.'.red)
     }
+  })
+}
+
+var copyBlog = function(blogPath, done){
+  ncp(__dirname+'/../blog' ,blogPath+'/blog', function(err){
+    if(err) throw err
+    ncp(__dirname+'/../posts' ,blogPath+'/posts', function(err){
+      if(err) throw err
+      done()
+    })
   })
 }
