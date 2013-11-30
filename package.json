@@ -22,5 +22,8 @@
   },
   "bin": {
     "badblog": "./bin/badblog"
+  },
+  "dependencies": {
+    "fs-extra": "~0.8.1"
   }
 }

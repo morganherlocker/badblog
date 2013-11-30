@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 var program = require('commander')
-  , fs = require('fs'),
   ncp = require('ncp').ncp,
   rimraf = require('rimraf'),
-  colors = require('colors');
+  colors = require('colors'),
+  fs = require('fs-extra');
 
 console.log('badblog =>'.bold.underline.inverse.green)
 
@@ -40,7 +40,9 @@ var copyBlog = function(blogPath, done){
     if(err) throw err
     ncp(__dirname+'/../posts' ,blogPath+'/posts', function(err){
       if(err) throw err
-      done()
+      fs.copy(__dirname+'/../blog/package.json',blogPath+'/package.json', function(err){
+        done()
+      })
     })
   })
 }
