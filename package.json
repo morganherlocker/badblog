@@ -19,5 +19,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/morganherlocker/badblog/issues"
+  },
+  "bin": {
+    "badblog": "./bin/badblog"
   }
 }

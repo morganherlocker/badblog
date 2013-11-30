@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , fs = require('fs'),
+  ncp = require('ncp').ncp,
+  rifraf = require('rimraf'),
+  colors = require('colors');
+
+console.log('badblog =>'.bold.underline.inverse.green)
+
+program
+  .option('-f, --force', 'Overwrite an existing directory if one exists')
+  .parse(process.argv);
+
+if(!program.args[0]) {
+  console.log('Please provide a path for your blog to be created.'.red)
+}
+else {
+  var blogPath = process.cwd() +'/'+ program.args[0]
+  console.log('Creating blog at: '+blogPath+'...')
+  fs.exists(blogPath, function(exists) {
+    if(!exists || (exists && program.force)) {
+      fs.mkdir(blogPath, function(err) {
+        if(err) throw err
+      })
+    }
+    else {
+      console.log('Directory already exists. Rename the directory or use -f to overwrite the existing directory.'.red)
+    }
+  })
+}
