@@ -24,7 +24,9 @@ else {
         fs.mkdir(blogPath, function(err) {
           if(err) throw err
           copyBlog(blogPath, function(){
-            console.log('<= sucess!'.bold.underline.inverse.green)
+            createConfig(program.args[0], blogPath, function(){
+              console.log('<= sucess!'.bold.underline.inverse.green)
+            })
           })
         })
       })
@@ -35,7 +37,27 @@ else {
   })
 }
 
-var copyBlog = function(blogPath, done){
+var createConfig = function(name, blogPath, done) {
+  var config = {
+    "name": name,
+    "links": [
+      {
+        "a": "twitter",
+        "href": "https://twitter.com"
+      },
+      {
+        "a": "github",
+        "href": "https://github.com"
+      }
+    ]
+  }
+  fs.writeFile(blogPath+'/config.json', JSON.stringify(config), function(err){
+    if(err) throw err
+    done()
+  })
+}
+
+var copyBlog = function(blogPath, done) {
   ncp(__dirname+'/../blog' ,blogPath+'/blog', function(err){
     if(err) throw err
     ncp(__dirname+'/../posts' ,blogPath+'/posts', function(err){
