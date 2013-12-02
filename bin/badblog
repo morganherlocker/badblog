@@ -51,7 +51,7 @@ var createConfig = function(name, blogPath, done) {
       }
     ]
   }
-  fs.writeFile(blogPath+'/config.json', JSON.stringify(config), function(err){
+  fs.writeFile(blogPath+'/config.json', JSON.stringify(config, null, 2), function(err){
     if(err) throw err
     done()
   })
