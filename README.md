@@ -25,7 +25,10 @@ myBlog/
 	|
 	-- blog/
 	-- posts/
+	-- config.json
 ```
+
+The config.json is loaded whenever the server is started. You set the title and any links you want in this file.
 
 In the posts directory you will see a couple files named "1" & "2". These are your first 2 posts. Add a new file called "3". The one requirement for a post is to have a title line. Your new post will look like this:
 
