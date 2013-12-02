@@ -1,13 +1,13 @@
 {
-    "name": "example",
-    "links": [
-        {
-            "a": "twitter",
-            "href": "https://twitter.com"
-        },
-        {
-            "a": "github",
-            "href": "https://github.com"
-        }
-    ]
+  "name": "example",
+  "links": [
+    {
+      "a": "twitter",
+      "href": "https://twitter.com"
+    },
+    {
+      "a": "github",
+      "href": "https://github.com"
+    }
+  ]
 }
