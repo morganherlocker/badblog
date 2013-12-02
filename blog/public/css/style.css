@@ -1,0 +1,37 @@
+body {
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-top:25px;
+  font: 14px "Sans-Serif", Helvetica, Arial, sans-serif;
+}
+
+@media screen and (max-width: 1000px){
+  body{
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
+@media screen and (max-width: 765px){
+  body{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+#home {
+  color: black; 
+  text-decoration:none;
+  background-color:black;
+  padding: 5px;
+  color: white;
+}
+
+footer {
+  padding-top: 20px;
+}
+
+img {
+  width: 40%;
+}
+
