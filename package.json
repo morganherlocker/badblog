@@ -1,6 +1,6 @@
 {
   "name": "badblog",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "a terrible node.js blog engine with barely any features",
   "repository": {
     "type": "git",
