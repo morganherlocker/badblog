@@ -1,3 +1,5 @@
+*DEPRECATED - this project is no longer maintained. I now use static site generation to keep things scaling. Feel free to clone and modify https://github.com/morganherlocker/blog*
+
 badblog
 =======
 
